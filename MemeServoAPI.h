@@ -153,14 +153,17 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
  */
 
 /**
-  * @brief  Set protocol, master address, send data function and receive data function
-  * @note   For none intrerupt receive function, pass receive function pointer as parameter
-  *         RecvDataImpl and call MMS_OnData(...) in receive function. For interrupt receive
-  *         mode, pass NULL as parameter RecvDataImpl and call MMS_OnData(...) in ISR. Call
-  *         this before using get & set funtions
+  * @brief  The function will set four parameters for the communication between servo motor and whose master.
+  * 1,communication protocol between master and servo motors
+  * 2,the address of master
+  * 3,the pointer of the function to send data by master
+  * 4,the pointer of the function to receive data by master
+  * @note   For none intrerupt mode, pass the pointer of the actual function of sendatada implemention as parameter 
+			For interrupt receive mode, pass NULL as parameter of RecvDataImpl and call MMS_OnData(...) in ISR. 
+  * @note2 This function should be called prior to any get & set funtions
   * @param  protocol: MMS_PROTOCOL_UART or MMS_PROTOCOL_I2C
-  * @param  address_master: master node address
-  * @param  SendDataImpl: send data function pointer
+  * @param  address_master: the address of the master node
+  * @param  SendDataImpl: pointer of sending data function
   * @param  RecvDataImpl: receive data function pointer, NULL for intrerupt receive mode
   * @retval None
   */
